@@ -133,12 +133,12 @@
     @keyframes fillBar { from { width: 0; } to { width: 100%; } }
 
     /* ── NAVBAR ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-      padding: 0 5%; height: 66px;
-      display: flex; align-items: center; justify-content: space-between;
-      transition: all var(--transition); border-bottom: 1px solid transparent;
-    }
+    .nav-right {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
     nav.scrolled {
       background: rgba(4,6,10,0.88); backdrop-filter: blur(24px); border-color: var(--border);
     }
