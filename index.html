@@ -20,7 +20,7 @@
       --font-body: 'DM Sans', sans-serif;
       --font-mono: 'DM Mono', monospace;
       --glow: 0 0 28px rgba(0,255,178,0.12);
-      --glow-strong: 0 0 10px rgba(0,255,178,0.15), 0 0 50px rgba(0,255,178,0.12);
+      --glow-strong: 0 0 18px rgba(0,255,178,0.35), 0 0 50px rgba(0,255,178,0.12);
     }
     [data-theme="dark"] {
       --bg: #04060A; --bg2: #080B11; --bg3: #0C1018;
@@ -133,12 +133,12 @@
     @keyframes fillBar { from { width: 0; } to { width: 100%; } }
 
     /* ── NAVBAR ── */
-    .nav-right {
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-    gap: 25px;
-}
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 0 5%; height: 66px;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: all var(--transition); border-bottom: 1px solid transparent;
+    }
     nav.scrolled {
       background: rgba(4,6,10,0.88); backdrop-filter: blur(24px); border-color: var(--border);
     }
@@ -201,6 +201,14 @@
       position: absolute; width: 18px; height: 18px; z-index: 3; pointer-events: none;
       opacity: 0.5;
     }
+    .hero-corner.tl { top: 80px; left: 3.5%; border-top: 1px solid var(--accent); border-left: 1px solid var(--accent); }
+    .hero-corner.tr { top: 80px; right: 3.5%; border-top: 1px solid var(--accent); border-right: 1px solid var(--accent); }
+    .hero-corner.bl { bottom: 55px; left: 3.5%; border-bottom: 1px solid var(--accent); border-left: 1px solid var(--accent); }
+    .hero-corner.br { bottom: 55px; right: 3.5%; border-bottom: 1px solid var(--accent); border-right: 1px solid var(--accent); }
+    .hero-hud {
+      position: absolute; z-index: 3; pointer-events: none;
+      font-family: var(--font-mono); font-size: 10px; color: var(--text3); letter-spacing: 2px; line-height: 1.9;
+    }
     .hero-hud.tl { top: 92px; left: 5%; }
     .hero-hud.tr { top: 92px; right: 5%; text-align: right; }
     .hero-hud span { color: var(--accent); }
@@ -213,7 +221,7 @@
     .hero-tag::before { content: ''; width: 22px; height: 1px; background: var(--accent); box-shadow: 0 0 6px var(--accent); }
     .hero-name {
       font-family: var(--font-display);
-      font-size: clamp(36px, 5.5vw, 64px); font-weight: 800;
+      font-size: clamp(44px, 7.2vw, 82px); font-weight: 800;
       line-height: 1.02; letter-spacing: -3px; margin-bottom: 16px; color: var(--text);
     }
     .hero-name .glow-word {
@@ -236,7 +244,7 @@
     .hero-role-row { display: flex; align-items: center; gap: 10px; margin-bottom: 28px; }
     .hero-role-pre { font-family: var(--font-mono); font-size: clamp(15px,2.2vw,20px); color: var(--text3); }
     .hero-role {
-      font-family: var(--font-display); font-size: clamp(16px,2vw,22px); font-weight: 700;
+      font-family: var(--font-display); font-size: clamp(17px,2.8vw,26px); font-weight: 700;
       color: var(--accent4); text-shadow: 0 0 20px rgba(0,200,255,.25);
     }
     .tcursor {
@@ -246,7 +254,7 @@
     }
     @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
     .hero-desc {
-      font-size: 15px; color: var(--text2); max-width: 480px;
+      font-size: 16px; color: var(--text2); max-width: 510px;
       line-height: 1.8; margin-bottom: 44px;
       border-left: 2px solid rgba(0,255,178,.28); padding-left: 16px;
     }
@@ -331,7 +339,7 @@
     }
     .section-tag::before { content: ''; width: 14px; height: 1px; background: var(--accent); box-shadow: 0 0 6px var(--accent); }
     .section-title {
-      font-family: var(--font-display); font-size: clamp(25px,4vw,38px); font-weight: 700;
+      font-family: var(--font-display); font-size: clamp(30px,5vw,50px); font-weight: 800;
       letter-spacing: -2px; line-height: 1.1; margin-bottom: 16px; color: var(--text);
     }
     .section-line {
@@ -586,7 +594,7 @@
 
   <!-- NAVBAR -->
   <nav id="navbar">
-   <a href="#hero" class="nav-logo">Shumaila.dev</a>
+    <a href="#hero" class="nav-logo">&lt;AC/&gt;</a>
     <ul class="nav-links">
       <li><a href="#hero" data-num="00.">Home</a></li>
       <li><a href="#about" data-num="01.">About</a></li>
@@ -613,7 +621,18 @@
   <!-- HERO -->
   <section id="hero">
     <canvas id="three-canvas"></canvas>
-    
+    <div class="hero-corner tl"></div>
+    <div class="hero-corner tr"></div>
+    <div class="hero-corner bl"></div>
+    <div class="hero-corner br"></div>
+    <div class="hero-hud tl">
+      <div>LAT <span>37.7749° N</span></div>
+      <div>LNG <span>122.4194° W</span></div>
+    </div>
+    <div class="hero-hud tr">
+      <div>STATUS <span>ONLINE</span></div>
+      <div>BUILD <span>v3.0.0</span></div>
+    </div>
     <div class="hero-content">
       <div class="hero-tag">Full Stack Engineer — Open to opportunities</div>
       <h1 class="hero-name">
